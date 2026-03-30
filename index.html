@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nassim Bellebia · Schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F4F0;
+  --white: #FFFFFF;
+  --dark: #0F0F0F;
+  --mid: #1A1A1A;
+  --text: #0F0F0F;
+  --text2: #666;
+  --text3: #999;
+  --border: #E0DDD6;
+
+  --green: #00C27A;
+  --green-bg: #E6FAF3;
+  --orange: #FF5C00;
+  --orange-bg: #FFF0E8;
+  --blue: #0066FF;
+  --blue-bg: #E5EFFF;
+  --purple: #7B2FFF;
+  --purple-bg: #F0E8FF;
+  --teal: #00B4B4;
+  --teal-bg: #E5F8F8;
+  --red: #FF1744;
+  --red-bg: #FFE8EC;
+  --gold: #D4A017;
+  --gold-bg: #FDF5E0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 0;
+  font-size: 13px;
+}
+
+/* TOP BANNER */
+.banner {
+  background: var(--dark);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.banner-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  color: white;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.banner-title span { color: var(--green); }
+.banner-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.banner-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* CONTENT */
+.content { padding: 32px 40px 60px; }
+
+/* ONGLETS JOURS */
+.days-bar {
+  background: var(--dark);
+  padding: 0 40px;
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.days-bar::-webkit-scrollbar { display: none; }
+.day-tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  color: #555;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.day-tab:hover { color: #aaa; }
+.day-tab.active { color: var(--green); border-bottom-color: var(--green); }
+.day-tab.today .day-dot { display: block; }
+.day-dot { display: none; width: 4px; height: 4px; border-radius: 50%; background: var(--green); }
+.day-tab.weekend-tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+.day-tab.dimanche-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+.day-fajr {
+  font-size: 9px;
+  color: #333;
+  font-family: 'JetBrains Mono', monospace;
+}
+.day-tab.active .day-fajr { color: rgba(0,194,122,0.7); }
+.day-tab.weekend-tab.active .day-fajr { color: rgba(123,47,255,0.7); }
+.day-tab.dimanche-tab.active .day-fajr { color: rgba(0,102,255,0.7); }
+
+/* STATS BAR */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.stat {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border-bottom: 3px solid;
+  position: relative;
+  overflow: hidden;
+}
+.stat::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  opacity: 0.06;
+  transform: translate(20px, -20px);
+}
+.stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 10px;
+  color: var(--text3);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* LEGEND */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.leg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text2);
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.leg-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* PHASE */
+.phase { margin-bottom: 36px; }
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 12px;
+}
+.phase-num-box {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: white;
+  background: var(--dark);
+  padding: 6px 14px;
+  border-radius: 6px 0 0 6px;
+}
+.phase-title-box {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--dark);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: none;
+  padding: 6px 18px;
+  flex: 1;
+}
+.phase-time-box {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: none;
+  padding: 6px 14px;
+  border-radius: 0 6px 6px 0;
+}
+
+/* BLOCKS */
+.blocks { display: flex; flex-direction: column; gap: 4px; }
+
+.block {
+  display: flex;
+  align-items: stretch;
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.block:hover {
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 var(--dark);
+}
+
+.block-time {
+  width: 72px;
+  min-width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.block-cat {
+  width: 4px;
+  flex-shrink: 0;
+}
+
+.block-body {
+  flex: 1;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.block-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.block-info { flex: 1; }
+
+.block-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+  letter-spacing: -0.2px;
+}
+
+.block-sub {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.block-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.block-tag {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.block-dur {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  min-width: 38px;
+  text-align: right;
+}
+
+/* ALERT RULE */
+.alert-rule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF8E1;
+  border: 1px solid #FFE082;
+  border-radius: 6px;
+  padding: 7px 14px 7px 86px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #7A5900;
+  letter-spacing: 0.02em;
+  margin: 3px 0;
+}
+
+/* MANTRAS */
+.mantras {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.mantras::before {
+  content: 'DISCIPLINE';
+  position: absolute;
+  bottom: -20px; right: -10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: 8px;
+  white-space: nowrap;
+}
+.mantras-head {
+  grid-column: 1 / -1;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 4px;
+  margin-bottom: 4px;
+}
+.mantra {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 300;
+  line-height: 1.5;
+  font-style: italic;
+  letter-spacing: -0.1px;
+  transition: background 0.2s;
+}
+.mantra:hover { background: rgba(255,255,255,0.07); }
+.mantra strong {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--green);
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 700px) {
+  .content { padding: 20px 16px 40px; }
+  .banner { padding: 16px 20px; }
+  .banner-title { font-size: 32px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .mantras { grid-template-columns: 1fr; padding: 24px 20px; }
+  .block-time { width: 54px; min-width: 54px; font-size: 9px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-title">NASSIM BELLEBIA<span>.</span></div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:#555;letter-spacing:4px;margin-top:2px;" id="banner-sub">SCHEDULE · FTMO 100K · 2026</div>
+  <div class="banner-right">
+    <div class="banner-pill" style="background:var(--green);color:#000;">FTMO 100K</div>
+    <div class="banner-pill" id="day-pill" style="background:rgba(255,255,255,0.08);color:#fff;"></div>
+    <div class="banner-pill" style="background:var(--orange);color:#fff;" id="mode-pill">7J/7 · SANS EXCEPTION</div>
+  </div>
+</div>
+
+<!-- BADGE HORAIRES PRIÈRE -->
+<div id="prayer-badge" style="display:none;font-family:'JetBrains Mono',monospace;font-size:11px;background:#0F0F0F;color:#00C27A;padding:10px 40px;border-bottom:1px solid #1a1a1a;letter-spacing:0.04em;"></div>
+
+<!-- ONGLETS 7 JOURS -->
+<div class="days-bar" id="days-bar"></div>
+
+<div class="content">
+
+<!-- STATS + LEGEND dynamiques -->
+<div class="stats" id="stats-block"></div>
+<div class="legend" id="legend-block" style="margin-bottom:32px;"></div>
+
+<!-- CONTAINER EMPLOI DU TEMPS DYNAMIQUE -->
+<div id="schedule-container"></div>
+
+<!-- MANTRAS dynamiques -->
+<div class="mantras" id="mantras-block"></div>
+
+<!-- TIMELINE -->
+<div class="timeline-wrap">
+  <div class="tl-header">
+    <div class="tl-title">6 MOIS<span>.</span>TRANSFORMATION</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#444;letter-spacing:0.06em;margin-top:4px;">NASSIM BELLEBIA · FTMO 100K · 2026</div>
+    <div class="tl-date" id="tl-dateInfo"></div>
+  </div>
+  <div class="tl-ticker">
+    <div class="tl-ticker-left">
+      <div class="tl-day" id="tl-dayNum">—</div>
+      <div class="tl-day-suffix">/ 184 jours</div>
+    </div>
+    <div class="tl-ticker-right">
+      <div class="tl-remain-label">Jours restants</div>
+      <div class="tl-remain" id="tl-remain">—</div>
+    </div>
+  </div>
+  <div class="tl-bar-wrap">
+    <div class="tl-bar-header">
+      <div class="tl-bar-label">Progression globale</div>
+      <div class="tl-bar-pct" id="tl-pct">0%</div>
+    </div>
+    <div class="tl-track"><div class="tl-fill" id="tl-fill" style="width:0%"></div></div>
+    <div class="tl-bar-dates"><span>23 mars 2026</span><span id="tl-today-label"></span><span>23 sept. 2026</span></div>
+  </div>
+  <div class="tl-stats">
+    <div class="tl-stat"><div class="tl-stat-val" id="tl-weeks" style="color:#00C27A">0</div><div class="tl-stat-label">Semaines</div></div>
+    <div class="tl-stat"><div class="tl-stat-val" id="tl-hours" style="color:#FF5C00">0h</div><div class="tl-stat-label">Heures invest.</div></div>
+    <div class="tl-stat"><div class="tl-stat-val" id="tl-sessions" style="color:#0066FF">0</div><div class="tl-stat-label">Sessions trading</div></div>
+    <div class="tl-stat"><div class="tl-stat-val" id="tl-left" style="color:#7B2FFF">—</div><div class="tl-stat-label">Jours restants</div></div>
+  </div>
+  <div class="tl-phases" id="tl-phases">
+    <div class="tl-vline"></div>
+    <div class="tl-vfill" id="tl-vfill" style="height:0%"></div>
+  </div>
+</div>
+
+</div>
+</body>
+
+<style>
+.timeline-wrap{background:#0F0F0F;border-radius:16px;padding:32px 40px 36px;margin-top:20px;}
+.tl-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+.tl-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#fff;line-height:1;}
+.tl-title span{color:#00C27A;}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:#555;text-align:right;line-height:1.8;}
+.tl-date strong{color:#00C27A;}
+.tl-ticker{background:rgba(0,194,122,0.08);border:1px solid rgba(0,194,122,0.2);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.tl-ticker-left{display:flex;align-items:baseline;gap:8px;}
+.tl-day{font-family:'Bebas Neue',sans-serif;font-size:40px;color:#00C27A;letter-spacing:2px;line-height:1;}
+.tl-day-suffix{font-size:11px;color:#00C27A;opacity:0.6;}
+.tl-ticker-right{text-align:right;}
+.tl-remain-label{font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.08em;font-family:'JetBrains Mono',monospace;margin-bottom:2px;}
+.tl-remain{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#555;letter-spacing:1px;}
+.tl-bar-wrap{margin-bottom:20px;}
+.tl-bar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.tl-bar-label{font-size:10px;color:#555;letter-spacing:0.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.tl-bar-pct{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#00C27A;letter-spacing:1px;}
+.tl-track{height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:visible;position:relative;}
+.tl-fill{height:100%;background:linear-gradient(90deg,#00C27A,#00E59A);border-radius:3px;position:relative;transition:width 1s ease;}
+.tl-fill::after{content:'';position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:12px;height:12px;border-radius:50%;background:#00C27A;border:2px solid #0F0F0F;box-shadow:0 0 8px rgba(0,194,122,0.5);}
+.tl-bar-dates{display:flex;justify-content:space-between;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#444;}
+.tl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;}
+.tl-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px 14px;text-align:center;}
+.tl-stat-val{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;line-height:1;margin-bottom:3px;}
+.tl-stat-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:0.08em;font-family:'JetBrains Mono',monospace;}
+.tl-phases{position:relative;padding-top:8px;padding-bottom:16px;}
+.tl-vline{position:absolute;left:20px;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.07);min-height:300px;}
+.tl-vfill{position:absolute;left:20px;top:0;width:2px;background:linear-gradient(180deg,#00C27A,#00E59A);transition:height 1s ease;}
+.tl-phase-item{display:flex;gap:20px;margin-bottom:18px;position:relative;}
+.tl-dot-wrap{width:40px;flex-shrink:0;display:flex;justify-content:center;padding-top:3px;}
+.tl-dot{width:13px;height:13px;border-radius:50%;border:2px solid;position:relative;z-index:1;}
+.tl-dot.done{background:var(--dc);border-color:var(--dc);}
+.tl-dot.current{background:transparent;border-color:var(--dc);animation:tlpulse 2s infinite;}
+.tl-dot.future{background:transparent;border-color:rgba(255,255,255,0.15);}
+@keyframes tlpulse{0%,100%{box-shadow:0 0 0 0 var(--dg);}50%{box-shadow:0 0 0 5px transparent;}}
+.tl-phase-content{flex:1;}
+.tl-phase-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+.tl-phase-num{font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:2px;color:#444;}
+.tl-phase-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;}
+.tl-phase-dates{font-family:'JetBrains Mono',monospace;font-size:9px;color:#444;margin-left:auto;}
+.tl-phase-status{font-size:9px;font-weight:600;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:5px;display:inline-block;}
+.tl-phase-desc{font-size:11px;color:#666;line-height:1.5;margin-bottom:5px;font-weight:300;}
+.tl-phase-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tl-phase-tag{font-size:9px;padding:2px 7px;border-radius:4px;letter-spacing:0.03em;font-weight:500;font-family:'JetBrains Mono',monospace;}
+</style>
+
+
+<script>
+/* ══════════════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════════════ */
+function el(id) { return document.getElementById(id); }
+
+function todayStr() {
+  const n = new Date();
+  return n.getFullYear() + '-' + String(n.getMonth()+1).padStart(2,'0') + '-' + String(n.getDate()).padStart(2,'0');
+}
+
+function addMins(t, m) {
+  if (!t || t.length < 4) return '--:--';
+  const [h, min] = t.substring(0,5).split(':').map(Number);
+  const tot = h * 60 + min + m;
+  return String(Math.floor(tot/60)).padStart(2,'0') + ':' + String(tot%60).padStart(2,'0');
+}
+
+function block(time, catColor, icon, title, sub, tagBg, tagColor, tagLabel, dur, id_time, id_sub) {
+  const timeAttr = id_time ? ` id="${id_time}"` : '';
+  const subAttr  = id_sub  ? ` id="${id_sub}"`  : '';
+  const tag = tagLabel ? `<div class="block-tag" style="background:${tagBg};color:${tagColor}">${tagLabel}</div>` : '';
+  const durEl = dur ? `<div class="block-dur">${dur}</div>` : '';
+  return `<div class="block">
+    <div class="block-time"${timeAttr}>${time}</div>
+    <div class="block-cat" style="background:${catColor}"></div>
+    <div class="block-body">
+      <div class="block-icon">${icon}</div>
+      <div class="block-info">
+        <div class="block-title">${title}</div>
+        <div class="block-sub"${subAttr}>${sub}</div>
+      </div>
+      <div class="block-right">${tag}${durEl}</div>
+    </div>
+  </div>`;
+}
+
+function phase(num, title, timeRange, blocksHtml) {
+  return `<div class="phase">
+    <div class="phase-header">
+      <div class="phase-num-box">${num}</div>
+      <div class="phase-title-box">${title}</div>
+      <div class="phase-time-box">${timeRange}</div>
+    </div>
+    <div class="blocks">${blocksHtml}</div>
+  </div>`;
+}
+
+function alertRule(text) {
+  return `<div class="alert-rule">⚡ ${text}</div>`;
+}
+
+/* ══════════════════════════════════════════════
+   BLOCS COMMUNS (Matin + Soir) — identiques tous les jours
+   Les heures seront mises à jour dynamiquement par loadPrayers()
+   ══════════════════════════════════════════════ */
+
+function buildMatinCommun() {
+  return phase('01','MATIN — CLARTÉ · CALME · CONTRÔLE','Fajr → 09:00',
+    block('--:--','#999','💧','Réveil — Rituel matinal','Eau · lit fait · pas de téléphone · pas de réseaux sociaux avant 12h','','','','','time-wake','') +
+    block('--:--','var(--green)','🧘','Méditation & Respiration','Cohérente 5s/5s · silence total · régulation du système nerveux','var(--green-bg)','var(--green)','Mental','15 min','time-medite','') +
+    block('--:--','var(--purple)','🕌','Fajr + Gratitude consciente','Prière · lever du soleil · 2–3 min de gratitude · ancrage du matin','var(--purple-bg)','var(--purple)','Spirituel','20 min','time-fajr','sub-fajr') +
+    block('--:--','var(--blue)','📖','Lecture profonde','Mental · trading · philosophie · notes actives dans Notion','var(--blue-bg)','var(--blue)','Lecture','60 min','time-lecture','') +
+    block('--:--','var(--green)','🏋️','Sport — Bloc Principal','Force / Boxe / HIIT · échauffement sérieux · étirements · stress physique maîtrisé = mental solide','var(--green-bg)','var(--green)','Sport','75 min','time-sport','') +
+    block('--:--','var(--teal)','🚿','Douche + Petit-déjeuner','Protéines · bons gras · zéro sucre','var(--teal-bg)','var(--teal)','Nutrition','15 min','time-douche','')
+  );
+}
+
+function buildMidiCommun() {
+  return `<div class="phase">
+    <div class="phase-header">
+      <div class="phase-num-box">03</div>
+      <div class="phase-title-box">MIDI — RÉCUPÉRATION & TRANSITION</div>
+      <div class="phase-time-box">12:15 → 13:30</div>
+    </div>
+    <div class="blocks">` +
+    block('12:15','#999','📓','Journal du Jour','Émotions · discipline · respect du process · pas d obsession PnL','','','','15 min','','') +
+    block('12:30','#999','🧹','Ménage — Entretien Maison','Environnement propre = esprit clair · rapide et efficace','','','','20 min','','') +
+    block('12:50','var(--teal)','🍽️','Déjeuner','Repas lent · 20 min sans écran · digestion calme','var(--teal-bg)','var(--teal)','Nutrition','25 min','','') +
+    block('13:15','var(--green)','😴','Sieste Courte','Récupération · maximum 20 min · pas plus','var(--green-bg)','var(--green)','Récup','15 min','','') +
+    `</div></div>`;
+}
+
+function buildSoirCommun() {
+  return `<div class="phase">
+    <div class="phase-header">
+      <div class="phase-num-box">05</div>
+      <div class="phase-title-box">SOIR — DESCENTE CONTRÔLÉE</div>
+      <div class="phase-time-box">Maghrib → 22:00</div>
+    </div>
+    <div class="blocks">` +
+    block('--:--','var(--purple)','🕌','Maghrib','Prière du coucher · coucher du soleil','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-maghrib','sub-maghrib') +
+    block('--:--','var(--teal)','🍽️','Dîner','Léger · protéines + légumes · peu de glucides le soir','var(--teal-bg)','var(--teal)','Nutrition','60 min','time-diner','') +
+    block('19:00','var(--blue)','📖','Lecture Légère / Arabe','Alternance · biographies · foi · programme arabe 26 semaines · Anki','var(--blue-bg)','var(--blue)','Culture','30 min','','') +
+    block('--:--','var(--purple)','🕌','Isha','Prière de nuit · dernière prière','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-isha','sub-isha') +
+    block('--:--','var(--blue)','🌙','Arabe / Temps Libre Calme','Flashcards Anki · programme arabe · pas d ecran stimulant','var(--blue-bg)','var(--blue)','Arabe','60 min','time-arabe','') +
+    block('21:00','var(--red)','📵','Zéro Écran','Lumière basse · calme total · noter 3 choses positives de la journée','var(--red-bg)','var(--red)','Règle','60 min','','') +
+    block('22:00','var(--green)','🛌','Coucher — Heure Fixe','Même heure tous les jours · téléphone mode avion · le sommeil est une arme stratégique','var(--green-bg)','var(--green)','Récup','','','') +
+    `</div></div>`;
+}
+
+/* ══════════════════════════════════════════════
+   EMPLOIS DU TEMPS SELON LE JOUR
+   ══════════════════════════════════════════════ */
+
+function buildSemaine() {
+  el('stats-block').innerHTML = `
+    <div class="stat" style="border-color:var(--green);"><div class="stat-val" style="color:var(--green)">16h15</div><div class="stat-label">Journée active</div></div>
+    <div class="stat" style="border-color:var(--orange);"><div class="stat-val" style="color:var(--orange)">3h00</div><div class="stat-label">Session trading</div></div>
+    <div class="stat" style="border-color:var(--blue);"><div class="stat-val" style="color:var(--blue)">3h30</div><div class="stat-label">Lecture & apprentissage</div></div>
+    <div class="stat" style="border-color:var(--purple);"><div class="stat-val" style="color:var(--purple)">8h00</div><div class="stat-label">Sommeil stratégique</div></div>`;
+
+  el('legend-block').innerHTML = `
+    <div class="leg"><div class="leg-dot" style="background:var(--purple)"></div>Spirituel</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Sport & récup</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--orange)"></div>Trading</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Lecture & apprentissage</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--teal)"></div>Nutrition</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--red)"></div>Règle stricte</div>`;
+
+  const trading = phase('02','TRADING — DISCIPLINE FTMO','09:00 → Dhuhr',
+    alertRule('LUNDI UNIQUEMENT — Analyse fondamentale 10 min avant 09h00 · DXY · COT · Calendrier économique') +
+    block('09:00','var(--orange)','🧠','Rituel FTMO + Analyse H4 / H1','Relecture règles · phrase · visualisation · zones · scénarios · aucun trade','var(--orange-bg)','var(--orange)','Trading','30 min','','') +
+    block('09:30','var(--orange)','🎯','Exécution M15 — Session Londres','Max 1 trade · checklist 8/8 obligatoire · sinon observation pure','var(--orange-bg)','var(--orange)','Trading','150 min','','') +
+    alertRule('SELL STOP / BUY STOP autorisés avant 12h · exécution automatique jusqu a 17h · annulation obligatoire avant 17h si non déclenché') +
+    block('--:--','var(--purple)','🕌','Dhuhr — Fin du Trading','Déconnexion plateforme · prière · clôture mentale de la session','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-dhuhr','sub-dhuhr')
+  );
+
+  const aprem = phase('04','APRÈS-MIDI — CONSTRUCTION & STABILITÉ','13:30 → Maghrib',
+    block('13:30','var(--blue)','📚','Apprentissage — Bloc Principal','Macro · backtest · capital · copywriting · vidéo selon le mois en cours','var(--blue-bg)','var(--blue)','Apprentissage','90 min','','') +
+    block('--:--','var(--purple)','🕌','Asr','Priere de l apres-midi','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-asr','sub-asr') +
+    block('--:--','var(--green)','🚶','Récupération Nerveuse','Marche lente / mobilité · respiration nasale · anti-tilt · anti-overtrade','var(--green-bg)','var(--green)','Récup','30 min','time-recup','') +
+    block('--:--','var(--blue)','🇬🇧','Anglais','20 min écoute active · 10 min résumé oral · 10 min Duolingo','var(--blue-bg)','var(--blue)','Anglais','40 min','time-anglais','') +
+    block('--:--','#999','🧩','Temps Structuré Calme','Marche · lecture légère · temps sans objectif · arriver à Maghrib tête vide','','','','60 min','time-calme','') +
+    alertRule('AUCUNE DÉCISION IMPORTANTE APRÈS 16H · annulation de tous les ordres en attente avant 17h')
+  );
+
+  el('schedule-container').innerHTML = buildMatinCommun() + trading + buildMidiCommun() + aprem + buildSoirCommun();
+
+  el('mantras-block').innerHTML = `
+    <div class="mantras-head">MANTRAS QUOTIDIENS</div>
+    <div class="mantra"><strong>01 — MARCHÉ</strong>"Je ne dois rien au marché aujourd hui."</div>
+    <div class="mantra"><strong>02 — DOUTE</strong>"Un doute = pas de trade. Le marché sera là demain."</div>
+    <div class="mantra"><strong>03 — PATIENCE</strong>"Mon intuition identifie le setup — ma patience attend la confirmation."</div>
+    <div class="mantra"><strong>04 — IDENTITÉ</strong>"La discipline est ma religion. Les marchés sont mon terrain."</div>`;
+}
+
+function buildSamedi() {
+  el('stats-block').innerHTML = `
+    <div class="stat" style="border-color:var(--purple);"><div class="stat-val" style="color:var(--purple)">3h00</div><div class="stat-label">Arabe intensif</div></div>
+    <div class="stat" style="border-color:var(--green);"><div class="stat-val" style="color:var(--green)">1h15</div><div class="stat-label">Sport</div></div>
+    <div class="stat" style="border-color:var(--blue);"><div class="stat-val" style="color:var(--blue)">30 min</div><div class="stat-label">Bilan trading</div></div>
+    <div class="stat" style="border-color:var(--teal);"><div class="stat-val" style="color:var(--teal)">Libre</div><div class="stat-label">Famille & proches</div></div>`;
+
+  el('legend-block').innerHTML = `
+    <div class="leg"><div class="leg-dot" style="background:var(--purple)"></div>Spirituel</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Sport & récup</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Arabe & apprentissage</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--teal)"></div>Nutrition</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--gold)"></div>Bilan & famille</div>`;
+
+  const arabe = phase('02','ARABE INTENSIF — RATTRAPAGE SEMAINE','09:00 → 12:00',
+    block('09:00','var(--blue)','🔤','Session Arabe — Bloc 1','Alphabet · révision des leçons de la semaine · correction prononciation · Bayyinah TV','var(--blue-bg)','var(--blue)','Arabe','60 min','','') +
+    block('10:00','var(--blue)','📝','Session Arabe — Bloc 2','Flashcards Anki · 300 mots fréquents du Coran · mémorisation active','var(--blue-bg)','var(--blue)','Arabe','60 min','','') +
+    block('11:00','var(--blue)','🎵','Session Arabe — Bloc 3','Écoute Coran avec suivi du texte · identification des mots connus · Quran.com','var(--blue-bg)','var(--blue)','Arabe','60 min','','')
+  );
+
+  const aprem = phase('04','APRÈS-MIDI — RÉCUP & FAMILLE','13:30 → Maghrib',
+    block('13:30','var(--teal)','👨‍👩‍👦','Temps Famille & Proches','Sortie · visite · appel · moments sans objectif de productivité','var(--teal-bg)','var(--teal)','Famille','Libre','','') +
+    block('--:--','var(--purple)','🕌','Asr','Priere de l apres-midi','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-asr','sub-asr') +
+    block('--:--','#D4A017','📊','Bilan Semaine Trading','Revue des trades · winrate · respect du plan · note dans le journal · froid et objectif','#FDF5E0','#D4A017','Bilan','30 min','','') +
+    block('--:--','#999','🧩','Temps Libre Calme','Lecture · musique · respiration · recharge mentale avant Maghrib','','','','60 min','','')
+  );
+
+  el('schedule-container').innerHTML = buildMatinCommun() + arabe + buildMidiCommun() + aprem + buildSoirCommun();
+
+  el('mantras-block').innerHTML = `
+    <div class="mantras-head">MANTRAS DU SAMEDI</div>
+    <div class="mantra"><strong>01 — REPOS</strong>"Le repos est une discipline, pas une faiblesse."</div>
+    <div class="mantra"><strong>02 — FAMILLE</strong>"Ceux qui m entourent méritent ma présence totale."</div>
+    <div class="mantra"><strong>03 — ARABE</strong>"Chaque mot appris me rapproche du Coran."</div>
+    <div class="mantra"><strong>04 — BILAN</strong>"Je regarde la semaine froidement pour construire la suivante."</div>`;
+}
+
+function buildDimanche() {
+  el('stats-block').innerHTML = `
+    <div class="stat" style="border-color:var(--blue);"><div class="stat-val" style="color:var(--blue)">3h00</div><div class="stat-label">Anglais intensif</div></div>
+    <div class="stat" style="border-color:var(--green);"><div class="stat-val" style="color:var(--green)">1h15</div><div class="stat-label">Sport</div></div>
+    <div class="stat" style="border-color:var(--orange);"><div class="stat-val" style="color:var(--orange)">1h00</div><div class="stat-label">Prépa semaine</div></div>
+    <div class="stat" style="border-color:var(--purple);"><div class="stat-val" style="color:var(--purple)">8h00</div><div class="stat-label">Coucher tôt</div></div>`;
+
+  el('legend-block').innerHTML = `
+    <div class="leg"><div class="leg-dot" style="background:var(--purple)"></div>Spirituel</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Sport & récup</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Anglais & apprentissage</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--teal)"></div>Nutrition</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--orange)"></div>Préparation semaine</div>`;
+
+  const anglais = phase('02','ANGLAIS INTENSIF — SESSION HEBDO','09:00 → 12:00',
+    block('09:00','var(--blue)','🎧','Anglais — Écoute Active','Podcast / interview / documentaire en anglais · prise de notes · 100% immersion','var(--blue-bg)','var(--blue)','Anglais','60 min','','') +
+    block('10:00','var(--blue)','🗣️','Anglais — Speaking & Shadowing','Répétition orale · shadowing d un locuteur natif · correction accent · fluidité','var(--blue-bg)','var(--blue)','Anglais','60 min','','') +
+    block('11:00','var(--blue)','✍️','Anglais — Grammaire & Vocabulaire','Exercices B2 · résumé écrit du podcast · Duolingo · révision des erreurs','var(--blue-bg)','var(--blue)','Anglais','60 min','','')
+  );
+
+  const aprem = phase('04','APRÈS-MIDI — PRÉPARATION SEMAINE','13:30 → Maghrib',
+    block('13:30','var(--blue)','📚','Lecture & Apprentissage','Livre du mois en cours · notes actives · 60 min sans interruption','var(--blue-bg)','var(--blue)','Lecture','60 min','','') +
+    block('--:--','var(--purple)','🕌','Asr','Priere de l apres-midi','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-asr','sub-asr') +
+    block('--:--','var(--orange)','🗂️','Préparation Semaine','Revue agenda · objectifs 5 jours · analyse macro lundi (DXY, COT, calendrier éco) · Notion','var(--orange-bg)','var(--orange)','Orga','60 min','','') +
+    block('--:--','#999','🧘','Visualisation & Mantras','Préparer mentalement la semaine · relire la stratégie · visualiser la discipline','','','','30 min','','')
+  );
+
+  el('schedule-container').innerHTML = buildMatinCommun() + anglais + buildMidiCommun() + aprem + buildSoirCommun();
+
+  el('mantras-block').innerHTML = `
+    <div class="mantras-head">MANTRAS DU DIMANCHE</div>
+    <div class="mantra"><strong>01 — PRÉPARATION</strong>"La semaine se gagne le dimanche soir."</div>
+    <div class="mantra"><strong>02 — ANGLAIS</strong>"Chaque heure en anglais est un investissement sur moi-même."</div>
+    <div class="mantra"><strong>03 — LUNDI</strong>"Demain je me lève avec un plan. Pas des espoirs."</div>
+    <div class="mantra"><strong>04 — IDENTITÉ</strong>"La discipline est ma religion. Les marchés sont mon terrain."</div>`;
+}
+
+/* ══════════════════════════════════════════════
+   ONGLETS 7 JOURS + RENDU
+   ══════════════════════════════════════════════ */
+
+const JOURS = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+const JOURS_FULL = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+// Fajr approximatif par jour de la semaine pour Arras (sera remplacé par vraies heures si dispo)
+let fajrByDay = ['--:--','--:--','--:--','--:--','--:--','--:--','--:--'];
+let selectedDay = new Date().getDay(); // jour actuel par défaut
+const todayDow = new Date().getDay();
+
+function buildDaysBar() {
+  const bar = el('days-bar');
+  bar.innerHTML = '';
+  for (let i = 0; i < 7; i++) {
+    const isWeekend = i === 6;
+    const isDim = i === 0;
+    const isToday = i === todayDow;
+    const isSelected = i === selectedDay;
+    let cls = 'day-tab';
+    if (isWeekend) cls += ' weekend-tab';
+    if (isDim) cls += ' dimanche-tab';
+    if (isToday) cls += ' today';
+    if (isSelected) cls += ' active';
+
+    const btn = document.createElement('button');
+    btn.className = cls;
+    btn.innerHTML = `
+      <span>${JOURS[i]}</span>
+      <span class="day-fajr" id="fajr-tab-${i}">${fajrByDay[i]}</span>
+      <span class="day-dot"></span>`;
+    btn.addEventListener('click', () => {
+      selectedDay = i;
+      buildDaysBar();
+      renderSelectedDay();
+    });
+    bar.appendChild(btn);
+  }
+}
+
+function renderSelectedDay() {
+  const dow = selectedDay;
+  const isWeekend = dow === 6;
+  const isDimanche = dow === 0;
+  const nomJour = JOURS_FULL[dow];
+
+  // Mettre à jour la pilule dans le banner
+  const today = new Date();
+  // Calculer la date du jour sélectionné (dans la semaine courante)
+  const diff = dow - todayDow;
+  const targetDate = new Date(today);
+  targetDate.setDate(today.getDate() + diff);
+  const dateStr = targetDate.toLocaleDateString('fr-FR', { day:'numeric', month:'long' });
+  const isToday = dow === todayDow;
+
+  if (el('day-pill')) {
+    el('day-pill').textContent = nomJour.toUpperCase() + ' · ' + dateStr + (isToday ? ' · AUJOURD HUI' : '');
+  }
+
+  if (isWeekend) {
+    if (el('mode-pill')) { el('mode-pill').textContent = 'SAMEDI · RECUP & ARABE'; el('mode-pill').style.background = 'var(--purple)'; }
+    buildSamedi();
+  } else if (isDimanche) {
+    if (el('mode-pill')) { el('mode-pill').textContent = 'DIMANCHE · PREPA SEMAINE'; el('mode-pill').style.background = 'var(--blue)'; }
+    buildDimanche();
+  } else {
+    if (el('mode-pill')) { el('mode-pill').textContent = '7J/7 · SANS EXCEPTION'; el('mode-pill').style.background = 'var(--orange)'; }
+    buildSemaine();
+  }
+
+  // Re-appliquer les prières pour le bon jour
+  reapplyPrayersForDay(dow);
+}
+
+function reapplyPrayersForDay(dow) {
+  // Les heures de prières varient peu d'un jour à l'autre (~1-2 min)
+  // On applique les heures du cache (aujourd'hui) pour tous les jours
+  // et on précise le jour dans le sub-texte
+  try {
+    const c = JSON.parse(localStorage.getItem(PRAYER_KEY) || '{}');
+    if (c.prayers) {
+      applyPrayers(c.prayers);
+      // Ajouter indication si c'est pas aujourd'hui
+      if (dow !== todayDow) {
+        const badge = el('prayer-badge');
+        if (badge) {
+          const diff = dow - todayDow;
+          const label = diff === 1 ? 'demain' : diff === -1 ? 'hier' : JOURS_FULL[dow].toLowerCase();
+          badge.innerHTML += ' <span style="opacity:0.5;font-size:9px">(horaires approx. ' + label + ')</span>';
+        }
+      }
+    }
+  } catch(e) {}
+}
+
+function updateFajrTabs(fajr) {
+  // Remplir les horaires Fajr dans les onglets
+  // Fajr varie d'environ 1-2 min par jour — on affiche la même heure pour tous
+  for (let i = 0; i < 7; i++) {
+    fajrByDay[i] = fajr;
+    const tabEl = el('fajr-tab-' + i);
+    if (tabEl) tabEl.textContent = fajr;
+  }
+}
+
+// Init
+buildDaysBar();
+renderSelectedDay();
+
+/* ══════════════════════════════════════════════
+   MOSQUÉE EL FETH ARRAS — Mawaqit + fallback AlAdhan
+   ══════════════════════════════════════════════ */
+const PRAYER_KEY = 'nassim_prayers_elfeth_v1';
+
+function addMinsP(t, m) {
+  if (!t || t.length < 4) return '--:--';
+  const [h, min] = t.substring(0,5).split(':').map(Number);
+  const tot = h * 60 + min + m;
+  return String(Math.floor(tot/60)).padStart(2,'0') + ':' + String(tot%60).padStart(2,'0');
+}
+
+function applyPrayers(p) {
+  const wake       = addMinsP(p.fajr, -15);
+  const medite     = addMinsP(p.fajr, -5);
+  const afterFajr  = addMinsP(p.fajr, 20);
+  const sportStart = addMinsP(afterFajr, 60);
+  const doucheStart= addMinsP(sportStart, 75);
+  const dinerStart = addMinsP(p.maghrib, 15);
+  const arabeStart = addMinsP(p.isha, 15);
+
+  const s = (id, v) => { if (el(id)) el(id).textContent = v; };
+  s('time-wake', wake); s('time-medite', medite);
+  s('time-fajr', p.fajr);
+  if (el('sub-fajr')) el('sub-fajr').textContent = 'Adhan ' + p.fajr + (p.sunrise?' · Chourouk '+p.sunrise:'') + ' · Iqama ~' + addMinsP(p.fajr, p.iqFajr) + ' · Gratitude + ancrage';
+  s('time-lecture', afterFajr); s('time-sport', sportStart); s('time-douche', doucheStart);
+  s('time-dhuhr', p.dhuhr);
+  if (el('sub-dhuhr')) el('sub-dhuhr').textContent = 'Adhan ' + p.dhuhr + ' · Iqama ~' + addMinsP(p.dhuhr, p.iqDhuhr) + ' · Déconnexion plateforme';
+  s('time-asr', p.asr);
+  if (el('sub-asr')) el('sub-asr').textContent = 'Adhan ' + p.asr + ' · Iqama ~' + addMinsP(p.asr, p.iqAsr);
+  // Blocs enchaînés après Asr + Iqama
+  const asrFin = addMinsP(p.asr, p.iqAsr + 15); // fin de la prière Asr
+  s('time-recup',  asrFin);
+  s('time-anglais', addMinsP(asrFin, 30));
+  s('time-calme',   addMinsP(asrFin, 70));
+  s('time-maghrib', p.maghrib);
+  if (el('sub-maghrib')) el('sub-maghrib').textContent = 'Adhan ' + p.maghrib + ' · Iqama ~' + addMinsP(p.maghrib, p.iqMaghrib) + ' · Coucher du soleil';
+  s('time-diner', dinerStart);
+  s('time-isha', p.isha);
+  if (el('sub-isha')) el('sub-isha').textContent = 'Adhan ' + p.isha + ' · Iqama ~' + addMinsP(p.isha, p.iqIsha) + ' · Prière de nuit';
+  s('time-arabe', arabeStart);
+
+  const badge = el('prayer-badge');
+  if (badge) {
+    badge.innerHTML = '🕌 <strong>El Feth Arras</strong> · Fajr <strong>' + p.fajr + '</strong> · Dhuhr <strong>' + p.dhuhr + '</strong> · Asr <strong>' + p.asr + '</strong> · Maghrib <strong>' + p.maghrib + '</strong> · Isha <strong>' + p.isha + '</strong>' + (p.source?' <span style="opacity:0.5;font-size:9px">('+p.source+')</span>':'');
+    badge.style.display = 'block';
+  }
+  // Mettre à jour les onglets avec l'heure de Fajr
+  if (typeof updateFajrTabs === 'function') updateFajrTabs(p.fajr);
+}
+
+async function loadPrayers() {
+  const today = todayStr();
+  try {
+    const c = JSON.parse(localStorage.getItem(PRAYER_KEY) || '{}');
+    if (c.date === today && c.prayers) { applyPrayers(c.prayers); return; }
+  } catch(e) {}
+
+  let prayers = null;
+  try {
+    const r = await fetch('https://mawaqit.net/api/2.0/mosque/elfeth-arras/prayer-times', { headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' } });
+    if (r.ok) {
+      const j = await r.json();
+      const t = j.times || [], iq = j.iqama || [];
+      if (t[0]) prayers = { fajr:t[0].substring(0,5), sunrise:(t[1]||'').substring(0,5), dhuhr:(t[2]||'').substring(0,5), asr:(t[3]||'').substring(0,5), maghrib:(t[4]||'').substring(0,5), isha:(t[5]||'').substring(0,5), iqFajr:parseInt(iq[0])||20, iqDhuhr:parseInt(iq[2])||20, iqAsr:parseInt(iq[3])||20, iqMaghrib:parseInt(iq[4])||5, iqIsha:parseInt(iq[5])||20, source:'Mawaqit El Feth' };
+    }
+  } catch(e) {}
+
+  if (!prayers) {
+    try {
+      const r = await fetch('https://api.aladhan.com/v1/timings?latitude=50.2912&longitude=2.7786&method=12');
+      if (r.ok) {
+        const j = await r.json();
+        if (j.code === 200 && j.data && j.data.timings) {
+          const t = j.data.timings;
+          prayers = { fajr:t.Fajr.substring(0,5), sunrise:t.Sunrise.substring(0,5), dhuhr:t.Dhuhr.substring(0,5), asr:t.Asr.substring(0,5), maghrib:t.Maghrib.substring(0,5), isha:t.Isha.substring(0,5), iqFajr:20, iqDhuhr:20, iqAsr:20, iqMaghrib:5, iqIsha:20, source:'AlAdhan (Arras)' };
+        }
+      }
+    } catch(e) {}
+  }
+
+  if (prayers) {
+    try { localStorage.setItem(PRAYER_KEY, JSON.stringify({ date: today, prayers })); } catch(e) {}
+    applyPrayers(prayers);
+  } else {
+    const badge = el('prayer-badge');
+    if (badge) { badge.style.display='block'; badge.style.background='#1a1400'; badge.style.color='#F5A623'; badge.textContent='⚠️ Horaires El Feth Arras — connexion internet requise'; }
+  }
+}
+
+loadPrayers();
+
+/* ══════════════════════════════════════════════
+   TIMELINE 6 MOIS
+   ══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function () {
+  const TOTAL = 184;
+  const phases = [
+    {num:'01',name:'LANCEMENT & FONDATIONS',    start:'2026-03-23',end:'2026-04-20',color:'#00C27A',glow:'rgba(0,194,122,0.3)',   desc:'Emploi du temps en place · FTMO discipline · Semaines 1–4 arabe · Mark Douglas · Macroéconomie débutée',   tags:['FTMO Challenge','Arabe S1–S4','Mark Douglas','Macro Mois 1']},
+    {num:'02',name:'CONSTRUCTION & RYTHME',     start:'2026-04-21',end:'2026-05-18',color:'#FF5C00',glow:'rgba(255,92,0,0.3)',    desc:'Macro consolidée · Autoroute du Millionnaire · Backtesting débuté · Arabe S5–S8 · LinkedIn actif',       tags:['Macro Mois 2','Backtesting','Arabe S5–S8','LinkedIn Weekly']},
+    {num:'03',name:'MONTÉE EN PUISSANCE',       start:'2026-05-19',end:'2026-06-16',color:'#0066FF',glow:'rgba(0,102,255,0.3)',   desc:'Premiers payouts FTMO · Gestion du capital · Ikigai + Sagesse & Business · Arabe S9–S12 · Copywriting',  tags:['Premiers Payouts','Gestion Capital','Arabe S9–S12','Copywriting']},
+    {num:'04',name:'PROFITABILITÉ & SCALABILITÉ',start:'2026-06-17',end:'2026-07-14',color:'#7B2FFF',glow:'rgba(123,47,255,0.3)',desc:'Track record solide · Les Magiciens des marchés · Arabe S13–S17 · Fiscalité trader',                   tags:['Track Record','Magiciens Marchés','Arabe S13–S17','Fiscalité']},
+    {num:'05',name:'EXPERTISE & CONTENU',       start:'2026-07-15',end:'2026-08-11',color:'#FF1744',glow:'rgba(255,23,68,0.3)',  desc:'Analyse technique avancée · Vidéo & contenu maîtrisé · Arabe S18–S22 · Préparation YouTube/TikTok',  tags:['Analyse Avancée','Vidéo & Contenu','Arabe S18–S22','YouTube Prep']},
+    {num:'06',name:'BILAN & NOUVEAU DÉPART',    start:'2026-08-12',end:'2026-09-23',color:'#D4A017',glow:'rgba(212,160,23,0.3)', desc:'Bilan 6 mois · Le Nectar Caché · Arabe S23–S26 · Lancement YouTube/TikTok · Capital propre',           tags:['Bilan Complet','Le Nectar Caché','Arabe S23–S26','Lancement YT']}
+  ];
+
+  function parseL(s) { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
+  function daysBetween(a,b) { return Math.round((b-a)/86400000); }
+  function fmt(d) { return d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'}); }
+
+  const START = parseL('2026-03-23'), END = parseL('2026-09-23');
+  const now = new Date(), today2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const dayNum = Math.max(0, Math.min(TOTAL, daysBetween(START, today2)));
+  const pct = Math.min(100, Math.max(0, (dayNum/TOTAL)*100));
+  const remaining = Math.max(0, TOTAL - dayNum);
+  const beforeStart = daysBetween(today2, START);
+
+  try { localStorage.setItem('nassim_timeline_v1', JSON.stringify({ date: todayStr(), dayNum, remaining, pct: pct.toFixed(1) })); } catch(e) {}
+
+  const s2 = (id, v) => { if (el(id)) el(id).textContent = v; };
+  s2('tl-dayNum', dayNum > 0 ? dayNum : (beforeStart > 0 ? 'J−'+beforeStart : '0'));
+  s2('tl-remain', remaining + ' jours');
+  s2('tl-pct', pct.toFixed(1) + '%');
+  s2('tl-weeks', Math.floor(dayNum/7));
+  s2('tl-hours', (dayNum*9)+'h');
+  s2('tl-sessions', dayNum);
+  s2('tl-left', remaining);
+  s2('tl-today-label', dayNum > 0 ? 'J+'+dayNum : (beforeStart > 0 ? 'Debut dans '+beforeStart+'j' : 'Debut 23/03'));
+  if (el("tl-dateInfo")) el("tl-dateInfo").innerHTML = "<strong>"+today2.toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"})+"</strong><br><span style='color:#444'>Fin 23 sept. 2026</span>";
+
+  setTimeout(() => { if (el('tl-fill')) el('tl-fill').style.width = pct+'%'; }, 100);
+
+  const container = el('tl-phases');
+  let activeIdx = -1;
+  phases.forEach((p,i) => { const ps=parseL(p.start),pe=parseL(p.end); if(today2>=ps&&today2<=pe) activeIdx=i; });
+  phases.forEach((p,i) => {
+    const ps=parseL(p.start),pe=parseL(p.end);
+    const isDone=today2>pe,isCurrent=today2>=ps&&today2<=pe,isFuture=today2<ps;
+    const dotClass=isFuture?'future':isCurrent?'current':'done';
+    const status=isFuture?'À venir':isCurrent?'En cours ●':'Complété ✓';
+    const tags=p.tags.map(t=>`<div class="tl-phase-tag" style="background:${isFuture?'rgba(255,255,255,0.04)':p.color+'18'};color:${isFuture?'#444':p.color}">${t}</div>`).join('');
+    const dotStyle='--dc:'+p.color+';--dg:'+p.glow+';'+(isCurrent?'border-color:'+p.color+';box-shadow:0 0 8px '+p.glow+';':isDone?'background:'+p.color+';border-color:'+p.color+';':'');
+    let phaseBar='';
+    if (isCurrent) {
+      const phDays=daysBetween(ps,pe)+1, elapsed=Math.max(0,daysBetween(ps,today2)), phPct=Math.min(100,Math.round((elapsed/phDays)*100));
+      phaseBar=`<div style="margin-top:8px;"><div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;color:#555;margin-bottom:4px;"><span>Progression phase</span><span style="color:${p.color}">${phPct}% · J+${elapsed}/${phDays}</span></div><div style="height:3px;background:rgba(255,255,255,0.07);border-radius:2px;"><div style="height:100%;width:${phPct}%;background:${p.color};border-radius:2px;"></div></div></div>`;
+    }
+    const div=document.createElement('div'); div.className='tl-phase-item';
+    div.innerHTML=`<div class="tl-dot-wrap"><div class="tl-dot ${dotClass}" style="${dotStyle}"></div></div><div class="tl-phase-content"><div class="tl-phase-row"><span class="tl-phase-num">PHASE ${p.num}</span><span class="tl-phase-name" style="color:${isFuture?'#444':'#fff'}">${p.name}</span><span class="tl-phase-dates">${fmt(ps)} → ${fmt(pe)}</span></div><div><span class="tl-phase-status" style="background:${isFuture?'rgba(255,255,255,0.05)':p.color+'22'};color:${isFuture?'#444':p.color}">${status}</span></div><div class="tl-phase-desc" style="color:${isFuture?'#333':'#666'}">${p.desc}</div><div class="tl-phase-tags">${tags}</div>${phaseBar}</div>`;
+    container.appendChild(div);
+  });
+  const vPct=activeIdx>=0?((activeIdx/(phases.length-1))*100)+'%':(today2>END?'100%':'0%');
+  setTimeout(()=>{ if(el('tl-vfill')) el('tl-vfill').style.height=vPct; }, 150);
+});
+</script>
+</html>
