@@ -649,11 +649,16 @@ function buildSemaine() {
   );
 
   const aprem = phase('04','APRÈS-MIDI — CONSTRUCTION & STABILITÉ','13:30 → Maghrib',
-    block('13:30','var(--blue)','📚','Apprentissage — Bloc Principal','Macro · backtest · capital · copywriting · vidéo selon le mois en cours','var(--blue-bg)','var(--blue)','Apprentissage','90 min','','') +
+    block('13:30','var(--blue)','📚','Apprentissage — Bloc Principal','Macro · capital · copywriting · vidéo selon le mois en cours','var(--blue-bg)','var(--blue)','Apprentissage','90 min','','') +
+    block('15:00','var(--blue)','📖','Lecture — Livre du mois','Lecture active · notes · 45 min sans interruption · concentration totale','var(--blue-bg)','var(--blue)','Lecture','45 min','time-lecture2','') +
+    block('15:45','var(--orange)','🔄','Backtesting — TradingView Replay','Rejouer des trades passés sur données historiques · pas de marchés live · améliorer la lecture de prix','var(--orange-bg)','var(--orange)','Backtest','45 min','time-backtest','') +
+    alertRule('BACKTESTING sur données historiques uniquement · TradingView Replay · plateforme FTMO déconnectée · zéro trade réel') +
+    block('16:30','#999','🧩','Temps Structuré Calme','Marche · respiration · pas d ecran stimulant · décompression avant Asr','','','','Libre','time-calme','') +
     block('--:--','var(--purple)','🕌','Asr','Priere de l apres-midi','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-asr','sub-asr') +
-    block('--:--','var(--green)','🚶','Récupération Nerveuse','Marche lente / mobilité · respiration nasale · anti-tilt · anti-overtrade','var(--green-bg)','var(--green)','Récup','30 min','time-recup','') +
+    block('--:--','var(--green)','🚶','Récupération Nerveuse','Marche lente / mobilité · respiration nasale · anti-tilt · anti-overtrade','var(--green-bg)','var(--green)','Récup','20 min','time-recup','') +
     block('--:--','var(--blue)','🇬🇧','Anglais','20 min écoute active · 10 min résumé oral · 10 min Duolingo','var(--blue-bg)','var(--blue)','Anglais','40 min','time-anglais','') +
-    block('--:--','#999','🧩','Temps Structuré Calme','Marche · lecture légère · temps sans objectif · arriver à Maghrib tête vide','','','','60 min','time-calme','') +
+    block('--:--','var(--blue)','📖','Lecture / Arabe — Soir','Lecture légère · Anki · programme arabe 26 semaines · biographies','var(--blue-bg)','var(--blue)','Culture','45 min','time-lect-soir','') +
+    block('--:--','var(--purple)','📿','Arabe — Quran & Dhikr','Flashcards Anki · écoute Coran · Quran.com · dhikr du soir','var(--purple-bg)','var(--purple)','Arabe','30 min','time-arabe2','') +
     alertRule('AUCUNE DÉCISION IMPORTANTE APRÈS 16H · annulation de tous les ordres en attente avant 17h')
   );
 
@@ -880,11 +885,11 @@ function applyPrayers(p) {
   if (el('sub-dhuhr')) el('sub-dhuhr').textContent = 'Adhan ' + p.dhuhr + ' · Iqama ~' + addMinsP(p.dhuhr, p.iqDhuhr) + ' · Déconnexion plateforme';
   s('time-asr', p.asr);
   if (el('sub-asr')) el('sub-asr').textContent = 'Adhan ' + p.asr + ' · Iqama ~' + addMinsP(p.asr, p.iqAsr);
-  // Blocs enchaînés après Asr + Iqama
-  const asrFin = addMinsP(p.asr, p.iqAsr + 15); // fin de la prière Asr
-  s('time-recup',  asrFin);
-  s('time-anglais', addMinsP(asrFin, 30));
-  s('time-calme',   addMinsP(asrFin, 70));
+  const asrFin = addMinsP(p.asr, p.iqAsr + 15);
+  s('time-recup',   asrFin);
+  s('time-anglais', addMinsP(asrFin, 20));
+  s('time-lect-soir', addMinsP(asrFin, 60));
+  s('time-arabe2',    addMinsP(asrFin, 105));
   s('time-maghrib', p.maghrib);
   if (el('sub-maghrib')) el('sub-maghrib').textContent = 'Adhan ' + p.maghrib + ' · Iqama ~' + addMinsP(p.maghrib, p.iqMaghrib) + ' · Coucher du soleil';
   s('time-diner', dinerStart);
