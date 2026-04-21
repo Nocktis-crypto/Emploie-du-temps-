@@ -578,13 +578,16 @@ function alertRule(text) {
    ══════════════════════════════════════════════ */
 
 function buildMatinCommun() {
-  return phase('01','MATIN — CLARTÉ · CALME · CONTRÔLE','Fajr → 09:00',
-    block('--:--','#999','💧','Réveil — Rituel matinal','Eau · lit fait · pas de téléphone · pas de réseaux sociaux avant 12h','','','','','time-wake','') +
-    block('--:--','var(--green)','🧘','Méditation & Respiration','Cohérente 5s/5s · silence total · régulation du système nerveux','var(--green-bg)','var(--green)','Mental','15 min','time-medite','') +
-    block('--:--','var(--purple)','🕌','Fajr + Gratitude consciente','Prière · lever du soleil · 2–3 min de gratitude · ancrage du matin','var(--purple-bg)','var(--purple)','Spirituel','20 min','time-fajr','sub-fajr') +
-    block('--:--','var(--blue)','📖','Lecture profonde','Mental · trading · philosophie · notes actives dans Notion','var(--blue-bg)','var(--blue)','Lecture','60 min','time-lecture','') +
-    block('--:--','var(--green)','🏋️','Sport — Bloc Principal','Force / Boxe / HIIT · échauffement sérieux · étirements · stress physique maîtrisé = mental solide','var(--green-bg)','var(--green)','Sport','75 min','time-sport','') +
-    block('--:--','var(--teal)','🚿','Douche + Petit-déjeuner','Protéines · bons gras · zéro sucre','var(--teal-bg)','var(--teal)','Nutrition','15 min','time-douche','')
+  return phase('01','MATIN — RÉVEIL · MENTAL · CORPS · TRADING','06:00 → 12:00',
+    block('06:00','var(--purple)','🌅','Réveil — Rituel matinal','Téléphone sur bureau · eau · lit fait · pas de réseaux sociaux','var(--purple-bg)','var(--purple)','Réveil','5 min','','') +
+    block('06:05','var(--green)','🧘','Méditation & Respiration','Cohérente 5s/5s · silence total · ancrage mental · régulation nerveuse','var(--green-bg)','var(--green)','Mental','15 min','','') +
+    block('06:20','var(--blue)','📖','Lecture profonde','Trading · macro · philosophie · notes actives Notion · focus total','var(--blue-bg)','var(--blue)','Lecture','45 min','time-lecture','') +
+    block('07:05','var(--green)','🏋️','Sport — Bloc Principal','Force / Boxe / HIIT · échauffement · étirements · mental solide','var(--green-bg)','var(--green)','Sport','75 min','time-sport','') +
+    block('08:20','var(--teal)','🚿','Douche + Petit-déjeuner','Protéines · bons gras · zéro sucre · rapide et efficace','var(--teal-bg)','var(--teal)','Nutrition','25 min','time-douche','') +
+    block('08:45','var(--orange)','🧠','Rituel FTMO + Analyse H4/H1','Relecture règles · visualisation · zones · scénarios · aucun trade','var(--orange-bg)','var(--orange)','Trading','15 min','','') +
+    alertRule('LUNDI UNIQUEMENT — Analyse macro avant 09h00 · DXY · COT · Calendrier économique') +
+    block('09:00','var(--orange)','🎯','Exécution M15 — Session Londres','Max 1 trade · checklist 8/8 obligatoire · sinon observation pure','var(--orange-bg)','var(--orange)','Trading','180 min','','') +
+    alertRule('SELL STOP / BUY STOP autorisés · exécution automatique jusqu à 17h · annulation obligatoire avant 17h si non déclenché')
   );
 }
 
@@ -592,14 +595,13 @@ function buildMidiCommun() {
   return `<div class="phase">
     <div class="phase-header">
       <div class="phase-num-box">03</div>
-      <div class="phase-title-box">MIDI — RÉCUPÉRATION & TRANSITION</div>
-      <div class="phase-time-box">12:15 → 13:30</div>
+      <div class="phase-title-box">MIDI — JOURNAL · MÉNAGE · DÉJEUNER</div>
+      <div class="phase-time-box">12:00 → 13:05</div>
     </div>
     <div class="blocks">` +
-    block('12:15','#999','📓','Journal du Jour','Émotions · discipline · respect du process · pas d obsession PnL','','','','15 min','','') +
-    block('12:30','#999','🧹','Ménage — Entretien Maison','Environnement propre = esprit clair · rapide et efficace','','','','20 min','','') +
-    block('12:50','var(--teal)','🍽️','Déjeuner','Repas lent · 20 min sans écran · digestion calme','var(--teal-bg)','var(--teal)','Nutrition','25 min','','') +
-    block('13:15','var(--green)','😴','Sieste Courte','Récupération · maximum 20 min · pas plus','var(--green-bg)','var(--green)','Récup','15 min','','') +
+    block('12:00','#999','📓','Journal + Bilan session','Trade du jour · émotions · checklist respectée · noter froidement','','','','15 min','','') +
+    block('12:15','#999','🧹','Ménage rapide','Environnement propre = esprit clair · cuisine · salon · efficace','','','','20 min','','') +
+    block('12:35','var(--teal)','🍽️','Déjeuner','Repas calme · sans écran · protéines · digestion tranquille','var(--teal-bg)','var(--teal)','Nutrition','30 min','','') +
     `</div></div>`;
 }
 
@@ -607,17 +609,15 @@ function buildSoirCommun() {
   return `<div class="phase">
     <div class="phase-header">
       <div class="phase-num-box">05</div>
-      <div class="phase-title-box">SOIR — DESCENTE CONTRÔLÉE</div>
-      <div class="phase-time-box">Maghrib → 22:00</div>
+      <div class="phase-title-box">SOIR — DÎNER · TIKTOK · TEMPS LIBRE</div>
+      <div class="phase-time-box">18:00 → 22:30</div>
     </div>
     <div class="blocks">` +
-    block('--:--','var(--purple)','🕌','Maghrib','Prière du coucher · coucher du soleil','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-maghrib','sub-maghrib') +
-    block('--:--','var(--teal)','🍽️','Dîner','Léger · protéines + légumes · peu de glucides le soir','var(--teal-bg)','var(--teal)','Nutrition','60 min','time-diner','') +
-    block('19:00','var(--blue)','📖','Lecture Légère / Arabe','Alternance · biographies · foi · programme arabe 26 semaines · Anki','var(--blue-bg)','var(--blue)','Culture','30 min','','') +
-    block('--:--','var(--purple)','🕌','Isha','Prière de nuit · dernière prière','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-isha','sub-isha') +
-    block('--:--','var(--blue)','🌙','Arabe / Temps Libre Calme','Flashcards Anki · programme arabe · pas d ecran stimulant','var(--blue-bg)','var(--blue)','Arabe','60 min','time-arabe','') +
-    block('21:00','var(--red)','📵','Zéro Écran','Lumière basse · calme total · noter 3 choses positives de la journée','var(--red-bg)','var(--red)','Règle','60 min','','') +
-    block('22:00','var(--green)','🛌','Coucher — Heure Fixe','Même heure tous les jours · téléphone mode avion · le sommeil est une arme stratégique','var(--green-bg)','var(--green)','Récup','','','') +
+    block('18:00','var(--teal)','🍽️','Dîner','Léger · protéines + légumes · peu de glucides le soir · sans écran','var(--teal-bg)','var(--teal)','Nutrition','30 min','time-diner','') +
+    block('18:30','#FF6B35','🎬','TikTok — La Chienneté','Script Claude · génération HeyGen · montage CapCut · publication · 1 vidéo/jour','rgba(255,107,53,0.1)','#FF6B35','TikTok','90 min','time-tiktok','') +
+    block('20:00','var(--green)','👨‍👩‍👦','Temps libre — Famille & Proches','Présence totale · famille · proches · conversations · recharge humaine · zéro productivité obligatoire','var(--green-bg)','var(--green)','Libre','Libre','time-famille','') +
+    block('22:00','#999','🧹','Ménage rapide + Préparer demain','Environnement propre · agenda demain noté · affaires prêtes · téléphone sur bureau','','','','15 min','time-menage','') +
+    block('22:30','var(--green)','🛌','Coucher — Heure Fixe','Même heure tous les jours · téléphone mode avion · sommeil = arme stratégique','var(--green-bg)','var(--green)','Récup','','','') +
     `</div></div>`;
 }
 
@@ -627,10 +627,10 @@ function buildSoirCommun() {
 
 function buildSemaine() {
   el('stats-block').innerHTML = `
-    <div class="stat" style="border-color:var(--green);"><div class="stat-val" style="color:var(--green)">16h15</div><div class="stat-label">Journée active</div></div>
+    <div class="stat" style="border-color:var(--green);"><div class="stat-val" style="color:var(--green)">06:00</div><div class="stat-label">Réveil fixe</div></div>
     <div class="stat" style="border-color:var(--orange);"><div class="stat-val" style="color:var(--orange)">3h00</div><div class="stat-label">Session trading</div></div>
-    <div class="stat" style="border-color:var(--blue);"><div class="stat-val" style="color:var(--blue)">3h30</div><div class="stat-label">Lecture & apprentissage</div></div>
-    <div class="stat" style="border-color:var(--purple);"><div class="stat-val" style="color:var(--purple)">8h00</div><div class="stat-label">Sommeil stratégique</div></div>`;
+    <div class="stat" style="border-color:#FF6B35;"><div class="stat-val" style="color:#FF6B35">1h30</div><div class="stat-label">TikTok création</div></div>
+    <div class="stat" style="border-color:var(--green);"><div class="stat-val" style="color:var(--green)">Libre</div><div class="stat-label">Soir famille & repos</div></div>`;
 
   el('legend-block').innerHTML = `
     <div class="leg"><div class="leg-dot" style="background:var(--purple)"></div>Spirituel</div>
@@ -638,31 +638,37 @@ function buildSemaine() {
     <div class="leg"><div class="leg-dot" style="background:var(--orange)"></div>Trading</div>
     <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Lecture & apprentissage</div>
     <div class="leg"><div class="leg-dot" style="background:var(--teal)"></div>Nutrition</div>
+    <div class="leg"><div class="leg-dot" style="background:#FF6B35"></div>TikTok création</div>
     <div class="leg"><div class="leg-dot" style="background:var(--red)"></div>Règle stricte</div>`;
 
-  const trading = phase('02','TRADING — DISCIPLINE FTMO','09:00 → Dhuhr',
-    alertRule('LUNDI UNIQUEMENT — Analyse fondamentale 10 min avant 09h00 · DXY · COT · Calendrier économique') +
-    block('09:00','var(--orange)','🧠','Rituel FTMO + Analyse H4 / H1','Relecture règles · phrase · visualisation · zones · scénarios · aucun trade','var(--orange-bg)','var(--orange)','Trading','30 min','','') +
-    block('09:30','var(--orange)','🎯','Exécution M15 — Session Londres','Max 1 trade · checklist 8/8 obligatoire · sinon observation pure','var(--orange-bg)','var(--orange)','Trading','150 min','','') +
-    alertRule('SELL STOP / BUY STOP autorisés avant 12h · exécution automatique jusqu a 17h · annulation obligatoire avant 17h si non déclenché') +
-    block('--:--','var(--purple)','🕌','Dhuhr — Fin du Trading','Déconnexion plateforme · prière · clôture mentale de la session','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-dhuhr','sub-dhuhr')
+  const trading = phase('02','TRADING — DISCIPLINE FTMO','09:00 → 12:00',
+    alertRule('LUNDI UNIQUEMENT — Analyse macro 10 min avant 09h00 · DXY · COT · Calendrier économique') +
+    alertRule('SELL STOP / BUY STOP autorisés avant 12h · exécution automatique jusqu à 17h · annulation obligatoire avant 17h si non déclenché')
   );
 
-  const aprem = phase('04','APRÈS-MIDI — CONSTRUCTION & STABILITÉ','13:30 → Maghrib',
-    block('13:30','var(--blue)','📚','Apprentissage — Bloc Principal','Macro · capital · copywriting · vidéo selon le mois en cours','var(--blue-bg)','var(--blue)','Apprentissage','90 min','','') +
-    block('15:00','var(--blue)','📖','Lecture — Livre du mois','Lecture active · notes · 45 min sans interruption · concentration totale','var(--blue-bg)','var(--blue)','Lecture','45 min','time-lecture2','') +
-    block('15:45','var(--orange)','🔄','Backtesting — TradingView Replay','Rejouer des trades passés sur données historiques · pas de marchés live · améliorer la lecture de prix','var(--orange-bg)','var(--orange)','Backtest','45 min','time-backtest','') +
-    alertRule('BACKTESTING sur données historiques uniquement · TradingView Replay · plateforme FTMO déconnectée · zéro trade réel') +
-    block('16:30','#999','🧩','Temps Structuré Calme','Marche · respiration · pas d ecran stimulant · décompression avant Asr','','','','Libre','time-calme','') +
-    block('--:--','var(--purple)','🕌','Asr','Priere de l apres-midi','var(--purple-bg)','var(--purple)','Spirituel','15 min','time-asr','sub-asr') +
-    block('--:--','var(--green)','🚶','Récupération Nerveuse','Marche lente / mobilité · respiration nasale · anti-tilt · anti-overtrade','var(--green-bg)','var(--green)','Récup','20 min','time-recup','') +
-    block('--:--','var(--blue)','🇬🇧','Anglais','20 min écoute active · 10 min résumé oral · 10 min Duolingo','var(--blue-bg)','var(--blue)','Anglais','40 min','time-anglais','') +
-    block('--:--','var(--blue)','📖','Lecture / Arabe — Soir','Lecture légère · Anki · programme arabe 26 semaines · biographies','var(--blue-bg)','var(--blue)','Culture','45 min','time-lect-soir','') +
-    block('--:--','var(--purple)','📿','Arabe — Quran & Dhikr','Flashcards Anki · écoute Coran · Quran.com · dhikr du soir','var(--purple-bg)','var(--purple)','Arabe','30 min','time-arabe2','') +
+  const aprem = phase('04','APRÈS-MIDI — APPRENTISSAGE · LANGUES · DÉCOMPRESSION','13:05 → 17:20',
+    block('13:05','var(--blue)','📚','Apprentissage — Bloc Principal','Macro · capital · copywriting · cours du mois · notes actives Notion','var(--blue-bg)','var(--blue)','Apprentissage','75 min','','') +
+    block('14:20','var(--blue)','📖','Lecture — Livre du mois','Lecture active · notes · concentration totale · sans interruption','var(--blue-bg)','var(--blue)','Lecture','45 min','time-lecture2','') +
+    block('15:05','var(--orange)','🔄','Backtesting — TradingView Replay','Données historiques uniquement · FTMO déconnectée · améliorer lecture de prix','var(--orange-bg)','var(--orange)','Backtest','45 min','time-backtest','') +
+    block('15:50','var(--blue)','🇬🇧','Anglais','20 min écoute active · 10 min résumé oral · 10 min Duolingo','var(--blue-bg)','var(--blue)','Anglais','40 min','time-anglais','') +
+    block('16:30','var(--blue)','🔤','Arabe — Session quotidienne','Anki · 300 mots fréquents · programme arabe 26 semaines · Quran.com','var(--blue-bg)','var(--blue)','Arabe','30 min','time-lect-soir','') +
+    block('17:00','var(--green)','🚶','Décompression nerveuse','Marche lente · respiration nasale · anti-tilt · transition vers le soir libre','var(--green-bg)','var(--green)','Récup','20 min','time-recup','') +
     alertRule('AUCUNE DÉCISION IMPORTANTE APRÈS 16H · annulation de tous les ordres en attente avant 17h')
   );
 
-  el('schedule-container').innerHTML = buildMatinCommun() + trading + buildMidiCommun() + aprem + buildSoirCommun();
+  el('schedule-container').innerHTML = `
+    <div style="background:var(--purple-bg);border:1px solid var(--purple);border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="font-size:11px;font-weight:700;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase">🕌 Prières du jour</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--purple)">
+        <span><strong>Fajr</strong> <span id="p-fajr" style="font-family:'JetBrains Mono',monospace">--:--</span></span>
+        <span><strong>Dhuhr</strong> <span id="p-dhuhr" style="font-family:'JetBrains Mono',monospace">--:--</span></span>
+        <span><strong>Asr</strong> <span id="p-asr" style="font-family:'JetBrains Mono',monospace">--:--</span></span>
+        <span><strong>Maghrib</strong> <span id="p-maghrib" style="font-family:'JetBrains Mono',monospace">--:--</span></span>
+        <span><strong>Isha</strong> <span id="p-isha" style="font-family:'JetBrains Mono',monospace">--:--</span></span>
+      </div>
+      <div style="font-size:10px;color:var(--purple);opacity:0.6;margin-left:auto">El Feth · Arras · dynamique</div>
+    </div>` +
+    buildMatinCommun() + buildMidiCommun() + aprem + buildSoirCommun();
 
   el('mantras-block').innerHTML = `
     <div class="mantras-head">MANTRAS QUOTIDIENS</div>
@@ -868,40 +874,24 @@ function addMinsP(t, m) {
 }
 
 function applyPrayers(p) {
-  const wake       = addMinsP(p.fajr, -15);
-  const medite     = addMinsP(p.fajr, -5);
-  const afterFajr  = addMinsP(p.fajr, 20);
-  const sportStart = addMinsP(afterFajr, 60);
-  const doucheStart= addMinsP(sportStart, 75);
-  const dinerStart = addMinsP(p.maghrib, 15);
-  const arabeStart = addMinsP(p.isha, 15);
-
   const s = (id, v) => { if (el(id)) el(id).textContent = v; };
-  s('time-wake', wake); s('time-medite', medite);
-  s('time-fajr', p.fajr);
-  if (el('sub-fajr')) el('sub-fajr').textContent = 'Adhan ' + p.fajr + (p.sunrise?' · Chourouk '+p.sunrise:'') + ' · Iqama ~' + addMinsP(p.fajr, p.iqFajr) + ' · Gratitude + ancrage';
-  s('time-lecture', afterFajr); s('time-sport', sportStart); s('time-douche', doucheStart);
-  s('time-dhuhr', p.dhuhr);
-  if (el('sub-dhuhr')) el('sub-dhuhr').textContent = 'Adhan ' + p.dhuhr + ' · Iqama ~' + addMinsP(p.dhuhr, p.iqDhuhr) + ' · Déconnexion plateforme';
-  s('time-asr', p.asr);
-  if (el('sub-asr')) el('sub-asr').textContent = 'Adhan ' + p.asr + ' · Iqama ~' + addMinsP(p.asr, p.iqAsr);
-  const asrFin = addMinsP(p.asr, p.iqAsr + 15);
-  s('time-recup',   asrFin);
-  s('time-anglais', addMinsP(asrFin, 20));
-  s('time-lect-soir', addMinsP(asrFin, 60));
-  s('time-arabe2',    addMinsP(asrFin, 105));
-  s('time-maghrib', p.maghrib);
-  if (el('sub-maghrib')) el('sub-maghrib').textContent = 'Adhan ' + p.maghrib + ' · Iqama ~' + addMinsP(p.maghrib, p.iqMaghrib) + ' · Coucher du soleil';
-  s('time-diner', dinerStart);
-  s('time-isha', p.isha);
-  if (el('sub-isha')) el('sub-isha').textContent = 'Adhan ' + p.isha + ' · Iqama ~' + addMinsP(p.isha, p.iqIsha) + ' · Prière de nuit';
-  s('time-arabe', arabeStart);
 
+  // Bloc flottant prières
+  s('p-fajr',   p.fajr);
+  s('p-dhuhr',  p.dhuhr);
+  s('p-asr',    p.asr);
+  s('p-maghrib',p.maghrib);
+  s('p-isha',   p.isha);
+
+  // Badge global
   const badge = el('prayer-badge');
   if (badge) {
     badge.innerHTML = '🕌 <strong>El Feth Arras</strong> · Fajr <strong>' + p.fajr + '</strong> · Dhuhr <strong>' + p.dhuhr + '</strong> · Asr <strong>' + p.asr + '</strong> · Maghrib <strong>' + p.maghrib + '</strong> · Isha <strong>' + p.isha + '</strong>' + (p.source?' <span style="opacity:0.5;font-size:9px">('+p.source+')</span>':'');
     badge.style.display = 'block';
   }
+
+  // Onglets Fajr
+  updateFajrTabs(p.fajr);
   // Mettre à jour les onglets avec l'heure de Fajr
   if (typeof updateFajrTabs === 'function') updateFajrTabs(p.fajr);
 }
